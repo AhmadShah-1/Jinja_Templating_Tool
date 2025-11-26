@@ -15,13 +15,13 @@ jobs:
 
     steps:
       # Checkout code
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
       # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x' # Match your local Node LTS version
+          node-version: '22' # Match your local Node LTS version
 
       # Install dependencies
       - name: Install dependencies
