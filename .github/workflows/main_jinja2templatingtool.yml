@@ -29,6 +29,25 @@ jobs:
           npm run build
           npm run test --if-present
       
+      - name: Prepare deployment package
+        run: |
+          # Verify dist folder was created
+          if (-not (Test-Path dist)) {
+            Write-Error "dist folder not found after build!"
+            exit 1
+          }
+          Write-Host "Build completed successfully. Dist folder exists."
+          # Remove node_modules to reduce package size (Azure will install production deps)
+          if (Test-Path node_modules) { 
+            Write-Host "Removing node_modules..."
+            Remove-Item -Recurse -Force node_modules 
+          }
+          # Remove dev files to reduce size
+          if (Test-Path .vscode) { Remove-Item -Recurse -Force .vscode }
+          if (Test-Path tests) { Remove-Item -Recurse -Force tests }
+          Get-ChildItem -Filter *.map -ErrorAction SilentlyContinue | Remove-Item -Force
+          Write-Host "Deployment package prepared."
+      
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
@@ -54,6 +73,18 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_919C41AC8C1145F58E0000EFD46C21D9 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_548B86CFF12C4D01B9810E584D408075 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_CB47B2ECF5904CB1992301A514C50976 }}
+
+      - name: Verify deployment files
+        run: |
+          echo "Files to deploy:"
+          ls -la
+          echo "Dist folder contents:"
+          ls -la dist/ || echo "Dist folder not found"
+          echo "Checking for required files:"
+          test -f package.json && echo "✓ package.json exists" || echo "✗ package.json missing"
+          test -f server.js && echo "✓ server.js exists" || echo "✗ server.js missing"
+          test -f web.config && echo "✓ web.config exists" || echo "✗ web.config missing"
+          test -d dist && echo "✓ dist folder exists" || echo "✗ dist folder missing"
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
