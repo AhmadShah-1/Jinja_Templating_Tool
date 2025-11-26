@@ -1,0 +1,4 @@
+# Run Program on Linux
+npm run start:linux
+
+
