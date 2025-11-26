@@ -11,29 +11,126 @@ let autoRefreshInterval;
 let currentTab = 'variables';
 const logicBuilder = new LogicBuilder();
 
-Office.onReady((info) => {
-  if (info.host === Office.HostType.Word) {
-    document.getElementById("sideload-msg").style.display = "none";
-    
-    // Initialize Logic Builder
-    logicBuilder.init("builder-canvas", "builder-vars");
-
-    // Attach event listeners
-    document.getElementById("action-btn").onclick = () => handlePrimaryAction();
-    document.getElementById("refresh-btn").onclick = () => tryCatch(scanDocument);
-    
-    // Tab Listeners
-    document.getElementById("tab-variables").onclick = () => switchTab('variables');
-    document.getElementById("tab-logic").onclick = () => switchTab('logic');
-    document.getElementById("tab-builder").onclick = () => switchTab('builder');
-    
-    // Initial scan
-    tryCatch(scanDocument);
-
-    // Start Auto-Refresh (Every 5 seconds)
-    startAutoRefresh();
+// Enhanced error handling and debugging
+function logError(message, error) {
+  console.error(`[Stanza Add-in] ${message}`, error);
+  const consoleOutput = document.getElementById("console-output");
+  if (consoleOutput) {
+    const errorDiv = document.createElement("div");
+    errorDiv.className = "text-red-400";
+    errorDiv.textContent = `ERROR: ${message}${error ? ' - ' + error.message : ''}`;
+    consoleOutput.appendChild(errorDiv);
+    consoleOutput.scrollTop = consoleOutput.scrollHeight;
   }
-});
+}
+
+function logInfo(message) {
+  console.log(`[Stanza Add-in] ${message}`);
+  const consoleOutput = document.getElementById("console-output");
+  if (consoleOutput) {
+    const infoDiv = document.createElement("div");
+    infoDiv.className = "text-gray-300";
+    infoDiv.textContent = message;
+    consoleOutput.appendChild(infoDiv);
+    consoleOutput.scrollTop = consoleOutput.scrollHeight;
+  }
+}
+
+// Check if Office.js is loaded
+if (typeof Office === 'undefined') {
+  logError("Office.js is not loaded. Make sure the add-in is properly sideloaded.");
+  const sideloadMsg = document.getElementById("sideload-msg");
+  if (sideloadMsg) {
+    sideloadMsg.classList.remove("hidden");
+    sideloadMsg.innerHTML = `
+      <div>
+        <h2 class="text-xl text-gray-600 mb-4">Please sideload your add-in.</h2>
+        <p class="text-sm text-gray-500 mb-2">Office.js failed to load.</p>
+        <p class="text-xs text-gray-400">Check the browser console (F12) for more details.</p>
+      </div>
+    `;
+  }
+} else {
+  logInfo("Office.js loaded, initializing...");
+  
+  Office.onReady((info) => {
+    logInfo(`Office.onReady called. Host: ${info.host}, Platform: ${info.platform}`);
+    
+    if (info.host === Office.HostType.Word) {
+      logInfo("Word host detected, initializing add-in...");
+      
+      try {
+        const sideloadMsg = document.getElementById("sideload-msg");
+        if (sideloadMsg) {
+          sideloadMsg.style.display = "none";
+        }
+        
+        // Initialize Logic Builder
+        try {
+          logicBuilder.init("builder-canvas", "builder-vars");
+          logInfo("Logic Builder initialized");
+        } catch (error) {
+          logError("Failed to initialize Logic Builder", error);
+        }
+
+        // Attach event listeners with error handling
+        try {
+          const actionBtn = document.getElementById("action-btn");
+          const refreshBtn = document.getElementById("refresh-btn");
+          const tabVariables = document.getElementById("tab-variables");
+          const tabLogic = document.getElementById("tab-logic");
+          const tabBuilder = document.getElementById("tab-builder");
+          
+          if (actionBtn) actionBtn.onclick = () => handlePrimaryAction();
+          if (refreshBtn) refreshBtn.onclick = () => tryCatch(scanDocument);
+          if (tabVariables) tabVariables.onclick = () => switchTab('variables');
+          if (tabLogic) tabLogic.onclick = () => switchTab('logic');
+          if (tabBuilder) tabBuilder.onclick = () => switchTab('builder');
+          
+          logInfo("Event listeners attached");
+        } catch (error) {
+          logError("Failed to attach event listeners", error);
+        }
+        
+        // Initial scan
+        tryCatch(scanDocument);
+
+        // Start Auto-Refresh (Every 5 seconds)
+        startAutoRefresh();
+        
+        logInfo("Add-in initialized successfully");
+      } catch (error) {
+        logError("Error during initialization", error);
+      }
+    } else {
+      logError(`Unsupported host: ${info.host}. This add-in only works with Word.`);
+      const sideloadMsg = document.getElementById("sideload-msg");
+      if (sideloadMsg) {
+        sideloadMsg.classList.remove("hidden");
+        sideloadMsg.innerHTML = `
+          <div>
+            <h2 class="text-xl text-gray-600 mb-4">Unsupported Host</h2>
+            <p class="text-sm text-gray-500">This add-in only works with Microsoft Word.</p>
+            <p class="text-xs text-gray-400 mt-2">Current host: ${info.host}</p>
+          </div>
+        `;
+      }
+    }
+  }).catch((error) => {
+    logError("Office.onReady failed", error);
+    const sideloadMsg = document.getElementById("sideload-msg");
+    if (sideloadMsg) {
+      sideloadMsg.classList.remove("hidden");
+      sideloadMsg.innerHTML = `
+        <div>
+          <h2 class="text-xl text-red-600 mb-4">Initialization Failed</h2>
+          <p class="text-sm text-gray-500 mb-2">${error.message || 'Unknown error'}</p>
+          <p class="text-xs text-gray-400">Check the browser console (F12) for more details.</p>
+        </div>
+      `;
+    }
+  });
+}
 
 function startAutoRefresh() {
     if (autoRefreshInterval) clearInterval(autoRefreshInterval);

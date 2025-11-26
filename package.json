@@ -20,7 +20,10 @@
     "prettier": "office-addin-lint prettier",
     "signin": "office-addin-dev-settings m365-account login",
     "signout": "office-addin-dev-settings m365-account logout",
+    "kill-port": "./kill-port.sh",
     "start": "office-addin-debugging start manifest.xml",
+    "start:linux": "webpack serve --mode development",
+    "sideload": "./sideload-helper.sh",
     "stop": "office-addin-debugging stop manifest.xml",
     "validate": "office-addin-manifest validate manifest.xml",
     "watch": "webpack --mode development --watch"
