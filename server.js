@@ -12,6 +12,18 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'taskpane.html'));
 });
 
+
+app.get('/taskpane.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'taskpane.html'));
+  });
+  
+  app.get('/commands.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'commands.html'));
+  });
+
+  
+  
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
