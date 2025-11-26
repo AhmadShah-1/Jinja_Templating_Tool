@@ -1,7 +1,6 @@
 node_modules
 
-.office-addin-dev-certs
-.office-addin-manifest
+
 .vscode
 *.log
 .DS_Store
