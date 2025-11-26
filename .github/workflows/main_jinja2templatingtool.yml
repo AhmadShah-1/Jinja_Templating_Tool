@@ -55,6 +55,10 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_548B86CFF12C4D01B9810E584D408075 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_CB47B2ECF5904CB1992301A514C50976 }}
 
+      - name: Configure startup command for Windows Web App
+        run: |
+          az webapp config set --name Jinja2TemplatingTool --resource-group $(az webapp show --name Jinja2TemplatingTool --query resourceGroup -o tsv) --startup-file "npm start"
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
@@ -62,5 +66,4 @@ jobs:
           app-name: 'Jinja2TemplatingTool'
           slot-name: 'Production'
           package: .
-          startup-command: 'npm install --production && npm start'
           

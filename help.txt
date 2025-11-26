@@ -1,4 +1,5 @@
 # Run Program on Linux
 npm run start:linux
 
-
+# Add this to yml for linux
+startup-command: 'npm install --production && npm start'
