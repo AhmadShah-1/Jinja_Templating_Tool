@@ -25,8 +25,8 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          npm install
-          npm run build --if-present
+          npm ci
+          npm run build
           npm run test --if-present
       
       - name: Upload artifact for deployment job
@@ -62,4 +62,5 @@ jobs:
           app-name: 'Jinja2TemplatingTool'
           slot-name: 'Production'
           package: .
+          startup-command: 'npm install --production && npm start'
           
