@@ -1,0 +1,9 @@
+node_modules
+dist
+.office-addin-dev-certs
+.office-addin-manifest
+.vscode
+*.log
+.DS_Store
+temp
+
