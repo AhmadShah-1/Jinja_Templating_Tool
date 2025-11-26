@@ -1,8 +1,12 @@
-node_modules
-
-
 .vscode
 *.log
 .DS_Store
 temp
 
+node_modules/
+src/
+*.map
+.vscode/
+.github/
+tests/
+README.md
