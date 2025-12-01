@@ -282,26 +282,48 @@ async function insertLogic() {
  */
 async function renameVariable(oldName, newName) {
   if (!newName || oldName === newName) return;
+  
+  // Validate new name
+  if (!newName.match(/^[a-zA-Z0-9_]+$/)) {
+    throw new Error("Invalid variable name. Only letters, numbers, and underscores are allowed.");
+  }
 
   if (autoRefreshInterval) clearInterval(autoRefreshInterval);
 
   await Word.run(async (context) => {
-      const body = context.document.body;
-      
-      // Use wildcards to find {{ ... }} blocks
-      const searchResults = body.search("\\{\\{*\\}\\}", { matchWildcards: true });
-      context.load(searchResults, 'text');
-      await context.sync();
-      
-      for (let i = searchResults.items.length - 1; i >= 0; i--) {
-          const item = searchResults.items[i];
-          const text = item.text;
-          const match = /\{\{\s*([a-zA-Z0-9_]+)\s*\}\}/.exec(text);
-          if (match && match[1] === oldName) {
-              item.insertText(`{{ ${newName} }}`, Word.InsertLocation.replace);
+      try {
+          const body = context.document.body;
+          
+          // Search for the exact pattern with spaces: {{ variableName }}
+          const searchPattern = `{{ ${oldName} }}`;
+          const searchResults = body.search(searchPattern, { matchCase: true });
+          context.load(searchResults, 'text');
+          await context.sync();
+          
+          // Replace all matches (process in reverse to avoid index shifting)
+          for (let i = searchResults.items.length - 1; i >= 0; i--) {
+              const range = searchResults.items[i];
+              range.insertText(`{{ ${newName} }}`, Word.InsertLocation.replace);
           }
+          
+          await context.sync();
+          
+          // Also handle pattern without spaces: {{variableName}}
+          const searchPatternNoSpaces = `{{${oldName}}}`;
+          const searchResults2 = body.search(searchPatternNoSpaces, { matchCase: true });
+          context.load(searchResults2, 'text');
+          await context.sync();
+          
+          for (let i = searchResults2.items.length - 1; i >= 0; i--) {
+              const range = searchResults2.items[i];
+              range.insertText(`{{ ${newName} }}`, Word.InsertLocation.replace);
+          }
+          
+          await context.sync();
+      } catch (error) {
+          logError("Error in renameVariable", error);
+          throw error;
       }
-      await context.sync();
   });
 
   startAutoRefresh();
@@ -659,3 +681,4 @@ async function tryCatch(callback) {
     consoleOutput.appendChild(line);
   }
 }
+

@@ -7,8 +7,8 @@
   <DisplayName DefaultValue="Stanza Template Assistant"/>
   <Description DefaultValue="Manage Jinja2 variables in your Word document."/>
   <!--
-  <IconUrl DefaultValue="https://www.contoso.com/assets/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://www.contoso.com/assets/icon-64.png"/>
+  <IconUrl DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/assets/icon-64.png"/>
   -->
   <IconUrl DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/assets/icon-64.png"/>
@@ -21,7 +21,7 @@
   </Hosts>
   <DefaultSettings>
   <!--
-      <SourceLocation DefaultValue="https://www.contoso.com/taskpane.html"/>
+      <SourceLocation DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/taskpane.html"/>
   -->
     <SourceLocation DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/taskpane.html"/>
   </DefaultSettings>
@@ -70,9 +70,9 @@
     <Resources>
       <bt:Images>
       <!--
-              <bt:Image id="Icon.16x16" DefaultValue="https://www.contoso.com/assets/icon-16.png"/>
-        <bt:Image id="Icon.32x32" DefaultValue="https://www.contoso.com/assets/icon-32.png"/>
-        <bt:Image id="Icon.80x80" DefaultValue="https://www.contoso.com/assets/icon-80.png"/>
+              <bt:Image id="Icon.16x16" DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/assets/icon-16.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/assets/icon-32.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/assets/icon-80.png"/>
       -->
         <bt:Image id="Icon.16x16" DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/assets/icon-16.png"/>
         <bt:Image id="Icon.32x32" DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/assets/icon-32.png"/>
@@ -81,8 +81,8 @@
       <bt:Urls>
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
         <!--
-        <bt:Url id="Commands.Url" DefaultValue="https://www.contoso.com/commands.html"/>
-        <bt:Url id="Taskpane.Url" DefaultValue="https://www.contoso.com/taskpane.html"/>
+        <bt:Url id="Commands.Url" DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/commands.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/taskpane.html"/>
         -->
         <bt:Url id="Commands.Url" DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/commands.html"/>
         <bt:Url id="Taskpane.Url" DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/taskpane.html"/>

@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 
+const path = require("path");
 const devCerts = require("office-addin-dev-certs");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -90,6 +91,18 @@ module.exports = async (env, options) => {
         options: env.WEBPACK_BUILD || options.https !== undefined ? options.https : await getHttpsOptions(),
       },
       port: process.env.npm_package_config_dev_server_port || 3000,
+      host: "0.0.0.0", // Allow access from Windows host machine
+      allowedHosts: "all", // Allow all hosts for WSL2 port forwarding
+      historyApiFallback: {
+        index: '/taskpane.html',
+        rewrites: [
+          { from: /^\/$/, to: '/taskpane.html' },
+        ],
+      },
+      static: {
+        directory: path.join(__dirname, 'assets'),
+        publicPath: '/assets',
+      },
     },
   };
 
