@@ -11,8 +11,8 @@
   <HighResolutionIconUrl DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/assets/icon-64.png"/>
   -->
   <!-- Production URLs -->
-  <IconUrl DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/assets/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/assets/icon-64.png"/>        
+  <IconUrl DefaultValue="https://jinjav2-aaakg9g0ejcnhqc2.eastus-01.azurewebsites.net/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://jinjav2-aaakg9g0ejcnhqc2.eastus-01.azurewebsites.net/assets/icon-64.png"/>        
   <SupportUrl DefaultValue="https://www.contoso.com/help"/>
   <AppDomains>
     <AppDomain>https://www.contoso.com</AppDomain>
@@ -25,7 +25,7 @@
     <SourceLocation DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/taskpane.html"/>
     -->
     <!-- Production URL -->
-    <SourceLocation DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/taskpane.html"/>
+    <SourceLocation DefaultValue="https://jinjav2-aaakg9g0ejcnhqc2.eastus-01.azurewebsites.net/taskpane.html"/>
   </DefaultSettings>
   <Permissions>ReadWriteDocument</Permissions>
   <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
@@ -77,9 +77,9 @@
         <bt:Image id="Icon.80x80" DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/assets/icon-80.png"/>
         --> 
         <!-- Production URLs -->
-        <bt:Image id="Icon.16x16" DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/assets/icon-16.png"/>
-        <bt:Image id="Icon.32x32" DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/assets/icon-32.png"/>
-        <bt:Image id="Icon.80x80" DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/assets/icon-80.png"/>
+        <bt:Image id="Icon.16x16" DefaultValue="https://jinjav2-aaakg9g0ejcnhqc2.eastus-01.azurewebsites.net/assets/icon-16.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://jinjav2-aaakg9g0ejcnhqc2.eastus-01.azurewebsites.net/assets/icon-32.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://jinjav2-aaakg9g0ejcnhqc2.eastus-01.azurewebsites.net/assets/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
@@ -89,8 +89,8 @@
         -->
 
 
-        <bt:Url id="Commands.Url" DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/commands.html"/>
-        <bt:Url id="Taskpane.Url" DefaultValue="https://jinja2templatingtool-a0evfpeugtefcta4.eastus-01.azurewebsites.net/taskpane.html"/>
+        <bt:Url id="Commands.Url" DefaultValue="https://jinjav2-aaakg9g0ejcnhqc2.eastus-01.azurewebsites.net/commands.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://jinjav2-aaakg9g0ejcnhqc2.eastus-01.azurewebsites.net/taskpane.html"/>
       
       
       </bt:Urls>
